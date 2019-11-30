@@ -1,4 +1,7 @@
+import os
 from django.db import models
+from django.conf import settings
+from django.utils.safestring import mark_safe
 
 STATUS = (
     (0,"Draft"),
@@ -24,3 +27,13 @@ class Category(models.Model):
     
     def __str__(self):
         return self.title
+    
+    def url(self, image_path):
+        return os.path.join(settings.MEDIA_URL, str(image_path))
+    
+    def thumbnail_tag(self):
+        return mark_safe('<img src="{}" width="250" height="160" />'.format(self.url(self.thumbnail)))
+    
+    def banner_tag(self):
+        return mark_safe('<img src="{}" width="1200" height="600" />'.format(self.url(self.banner)))
+    banner_tag.short_description = 'Banner Image'
