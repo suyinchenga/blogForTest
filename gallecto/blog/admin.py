@@ -8,3 +8,4 @@ class CategoryAdmin(admin.ModelAdmin):
     readonly_fields = ['thumbnail_tag', 'banner_tag']
 
 admin.site.register(Category, CategoryAdmin)
+admin.site.register(Post)
