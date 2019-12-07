@@ -23,5 +23,6 @@ from .views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_page),
-    path('blog/', blog_page)
+    path('blog/', blog_page),
+    path('blog/<int:category_id>/', post_list)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
