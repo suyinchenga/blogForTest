@@ -20,3 +20,9 @@ def post_list(request, slug):
 	context["posts"] = posts
 
 	return render(request, 'post_list.html', context)
+
+def post_view(request, slug):
+	context = {}
+	post = Post.objects.get(slug=slug)
+	context["post"] = post
+	return render(request, "post.html", context)
