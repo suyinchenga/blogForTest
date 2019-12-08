@@ -14,8 +14,6 @@ class Category(models.Model):
     #thumbnails to MEDIA_ROOT//blog/thumbnails
     thumbnail = models.ImageField(null=True, upload_to="blog/thumbnails")
     shortDescription = models.CharField(max_length=100)
-    #Banners to MEDIA_ROOT/blog/banners
-    banner = models.ImageField(upload_to="blog/banners")
     description = models.TextField(default='')
     index = models.IntegerField(default=0)
     status = models.IntegerField(choices=STATUS,default=0)
@@ -29,16 +27,8 @@ class Category(models.Model):
     def __str__(self):
         return self.title
     
-    def url(self, image_path):
-        return os.path.join(settings.MEDIA_URL, str(image_path))
-    
     def thumbnail_tag(self):
-        return mark_safe('<img src="{}" width="250" height="160" />'.format(self.url(self.thumbnail)))
-    
-    def banner_tag(self):
-        return mark_safe('<img src="{}" width="1200" height="600" />'.format(self.url(self.banner)))
-    banner_tag.short_description = 'Banner Image'
-
+        return mark_safe('<img src="{}" width="250" height="160" />'.format(url(self.thumbnail)))
 
 class Post(models.Model):
     category_id = models.ForeignKey('Category', null=True, on_delete=models.SET_NULL)
@@ -60,3 +50,10 @@ class Post(models.Model):
     def __str__(self):
         return self.title
     
+    def banner_tag(self):
+        return mark_safe('<img src="{}" width="750" height="300" />'.format(url(self.banner)))
+
+
+
+def url(image_path):
+    return os.path.join(settings.MEDIA_URL, str(image_path))

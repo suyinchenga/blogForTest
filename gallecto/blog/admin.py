@@ -4,8 +4,16 @@ from .models import *
 # Register your models here.
 
 class CategoryAdmin(admin.ModelAdmin):
-    # explicitly reference fields to be shown, note image_tag is read-only
-    readonly_fields = ['thumbnail_tag', 'banner_tag']
+    # explicitly reference fields to be shown, note image_tag is read-only'
+    list_display = ['id', 'title', 'slug', 'status', 'created_on',]
+    list_editable = ['status']
+    readonly_fields = ['thumbnail_tag']
+
+class PostAdmin(admin.ModelAdmin):
+    # explicitly reference fields to be shown, note image_tag is read-only'
+    list_display = ['id', 'title', 'slug', 'status', 'created_on',]
+    list_editable = ['status']
+    readonly_fields = ['banner_tag']
 
 admin.site.register(Category, CategoryAdmin)
-admin.site.register(Post)
+admin.site.register(Post, PostAdmin)
