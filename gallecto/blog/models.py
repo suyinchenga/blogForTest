@@ -9,7 +9,8 @@ STATUS = (
 )
 # Create your models here.
 class Category(models.Model):
-    title = models.CharField(max_length=40)
+    title = models.CharField(max_length = 250)
+    slug = models.SlugField(max_length = 250, null = True, blank = True)
     #thumbnails to MEDIA_ROOT//blog/thumbnails
     thumbnail = models.ImageField(null=True, upload_to="blog/thumbnails")
     shortDescription = models.CharField(max_length=100)
@@ -41,7 +42,8 @@ class Category(models.Model):
 
 class Post(models.Model):
     category_id = models.ForeignKey('Category', null=True, on_delete=models.SET_NULL)
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=250)
+    slug = models.SlugField(max_length = 250, null = True, blank = True)
     #Banners to MEDIA_ROOT/blog/banners
     banner = models.ImageField(upload_to="blog/banners")
     description = models.TextField(default='')
