@@ -1,0 +1,19 @@
+#Server block to server static files of django
+server {
+        listen 80;
+        listen [::]:80;
+
+        server_name local.gallecto.com;
+
+        access_log /var/log/nginx/django.access.log;
+        error_log /var/log/nginx/django.error.log;
+
+        location / {
+           index  index.html index.htm;
+       }
+
+        location /static {
+                autoindex on;
+                root   /gallecto/gallecto/;
+        }
+}
