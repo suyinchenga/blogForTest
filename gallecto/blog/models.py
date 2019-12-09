@@ -1,6 +1,7 @@
 import os
 from django.db import models
 from django.conf import settings
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils.safestring import mark_safe
 
 STATUS = (
@@ -37,7 +38,7 @@ class Post(models.Model):
     #Banners to MEDIA_ROOT/blog/banners
     banner = models.ImageField(upload_to="blog/banners")
     description = models.TextField(default='')
-    content = models.TextField()
+    content = RichTextUploadingField(blank =True, null = True)
     status = models.IntegerField(choices=STATUS,default=0)
     published_on = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     created_on = models.DateTimeField(auto_now_add=True)

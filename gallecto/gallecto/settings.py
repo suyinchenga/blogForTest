@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+    'ckeditor',
     'ckeditor_uploader'
 ]
 
@@ -123,4 +124,4 @@ USE_TZ = True
 STATIC_URL = 'http://local.gallecto.com/static/'
 MEDIA_URL = '/media/'
 
-CKEDITOR_UPLOAD_PATH = os.path.join(MEDIA_ROOT, 'content')
+CKEDITOR_UPLOAD_PATH = 'blog/content/'
