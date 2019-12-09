@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls.static import static
+from django.conf.urls import handler404
 from django.conf import settings
 from blog.views import *
 from .views import *
@@ -27,3 +28,5 @@ urlpatterns = [
     path('blog/<slug:slug>/', post_list, name = "Post Listing"),
     path('post/<slug:slug>/', post_view, name = "Post View")
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = gallecto_404
