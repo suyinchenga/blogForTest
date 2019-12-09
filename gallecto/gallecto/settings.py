@@ -123,4 +123,4 @@ USE_TZ = True
 STATIC_URL = 'http://local.gallecto.com/static/'
 MEDIA_URL = '/media/'
 
-CKEDITOR_UPLOAD_PATH = MEDIA_ROOT
+CKEDITOR_UPLOAD_PATH = os.path.join(MEDIA_ROOT, 'content')
