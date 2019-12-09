@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog'
+    'blog',
+    'ckeditor_uploader'
 ]
 
 MIDDLEWARE = [
@@ -82,9 +83,7 @@ DATABASES = {
 }
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static")
-]
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
@@ -124,3 +123,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
+CKEDITOR_UPLOAD_PATH = MEDIA_ROOT

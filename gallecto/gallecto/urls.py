@@ -14,7 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+import ckeditor
+from django.urls import path, re_path, include
 from django.conf.urls.static import static
 from django.conf.urls import handler404
 from django.conf import settings
@@ -26,7 +27,8 @@ urlpatterns = [
     path('', home_page),
     path('blog/', blog_page, name = "Blog Page"),
     path('blog/<slug:slug>/', post_list, name = "Post Listing"),
-    path('post/<slug:slug>/', post_view, name = "Post View")
+    path('post/<slug:slug>/', post_view, name = "Post View"),
+    re_path(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = gallecto_404
