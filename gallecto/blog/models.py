@@ -67,7 +67,7 @@ class Comment(models.Model):
     #     self.approved = True
     
     def __str__(self):
-        return self.text
+        return self.name
 
 def url(image_path):
     return os.path.join(settings.MEDIA_URL, str(image_path))
