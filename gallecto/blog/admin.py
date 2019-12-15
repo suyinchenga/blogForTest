@@ -19,5 +19,13 @@ class PostAdmin(admin.ModelAdmin):
     list_editable = ['status']
     readonly_fields = ['banner_tag']
 
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name', 'email','approved', 'created_on']
+    list_filter = ['approved', 'created_on']
+    search_fields = ['id', 'name', 'email']
+    list_editable = ['approved']
+
+
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Post, PostAdmin)
+admin.site.register(Comment, CommentAdmin)
