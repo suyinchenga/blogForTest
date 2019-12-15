@@ -32,7 +32,7 @@ class Category(models.Model):
         return mark_safe('<img src="{}" width="250" height="160" />'.format(url(self.thumbnail)))
 
 class Post(models.Model):
-    category_id = models.ForeignKey('Category', null=True, on_delete=models.SET_NULL)
+    category = models.ForeignKey('Category', null=True, on_delete=models.SET_NULL)
     title = models.CharField(max_length=250)
     slug = models.SlugField(max_length = 250, null = True, blank = True)
     #Banners to MEDIA_ROOT/blog/banners
@@ -54,7 +54,20 @@ class Post(models.Model):
     def banner_tag(self):
         return mark_safe('<img src="{}" width="750" height="300" />'.format(url(self.banner)))
 
+class Comment(models.Model):
+    post = models.ForeignKey('Post', null=True, on_delete=models.CASCADE, related_name='comments')
+    name = models.CharField(max_length = 80)
+    email = models.CharField(max_length = 250)
+    text = models.TextField()
+    created_on = models.DateTimeField(auto_now_add = True)
+    approved = models.BooleanField(default = False)
+    parent = models.ForeignKey('self', null=True, blank=True, on_delete = models.CASCADE)
 
+    # def approve_comment(self):
+    #     self.approved = True
+    
+    def __str__(self):
+        return self.text
 
 def url(image_path):
     return os.path.join(settings.MEDIA_URL, str(image_path))
