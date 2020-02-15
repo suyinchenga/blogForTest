@@ -28,6 +28,7 @@ urlpatterns = [
     path('blog/', blog_page, name = "Blog Page"),
     path('blog/<slug:slug>/', post_list, name = "Post Listing"),
     path('post/<slug:slug>/', post_view, name = "Post View"),
+    path('create-comment', create_comment, name = "Create Comment"),
     re_path(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

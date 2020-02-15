@@ -31,7 +31,7 @@
         </div>
         <hr>
         <!-- Comments Form -->
-        <div class="card my-4">
+        <!-- <div class="card my-4">
           <h5 class="card-header">Leave a Comment:</h5>
           <div class="card-body">
             <form>
@@ -41,7 +41,9 @@
               <button type="submit" class="btn btn-primary">Submit</button>
             </form>
           </div>
-        </div>
+        </div> -->
+        <p>Click <a data-toggle="modal" data-target="#comment_modal" href="/create-comment">here</a> to show the modal</p>
+        <div class="modal fade" id="comment_modal"></div>
         <div id="Comments">
           <ul class="list-group">
           {% if comments %}
@@ -116,4 +118,15 @@
     <!-- /.row -->
   </div>
   <!-- /.container -->
+  <script>
+    $('#comment_modal').on('show.bs.modal', function (event) {
+        var modal = $(this)
+        $.ajax({
+            url: "/create-comment",
+            context: document.body
+        }).done(function(response) {
+            modal.html(response);
+        });
+    })
+    </script>
 {% endblock %}
