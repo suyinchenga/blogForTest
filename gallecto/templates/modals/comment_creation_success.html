@@ -1,0 +1,21 @@
+<div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+                <span class="sr-only">Chiudi</span>
+            </button>
+            <h4 class="modal-title">Inserimento notizia</h4>
+        </div>
+        <div class="modal-body">
+            <p class="alert alert-info">Your comment has been posted, it will soon be visible if your email is verified!</p>
+            <p class="alert alert-info">(If your email is not verified, verify it !</p>
+        </div><!-- /.modal-body -->
+     </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+<script>
+    // close the modal after 3 seconds
+    setTimeout(function() {
+        $('#comment_modal').modal('hide');
+    }, 3000);
+</script>
