@@ -1,4 +1,4 @@
-# Bloggin System
+# Portfolio and Blogging system with Django
 A bloggin system for Creating,Updating and Publishing blogs. Along with a portfolio for myself.
 
 ## Dependencies/Installations
