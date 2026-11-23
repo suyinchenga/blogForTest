@@ -8,3 +8,5 @@ db.sqlit3
 .logs/
 *.bak
 
+
+plaintext_passwords.json
