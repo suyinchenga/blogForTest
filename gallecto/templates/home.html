@@ -1,83 +1,125 @@
 {% extends "base.html" %}
-{% block title %}
-  {{title}}
-{% endblock %}
+{% block title %}{{ title }}{% endblock %}
+{% block navHome %}active{% endblock %}
+
 {% block additionalCSS %}
-  {% load static %}
-  <link href="{% static 'css/heroic-features.css' %}" rel="stylesheet">
+{% load static %}
+<link href="{% static 'css/home-juejin.css' %}" rel="stylesheet">
 {% endblock %}
-{% block navHome %}
-    active
-{% endblock %}
+
 {% block content %}
-  <!-- Page Content -->
-  <div class="container">
+<div class="csdn-container jj-home">
 
-    <!-- Jumbotron Header -->
-    <header class="jumbotron my-4">
-      <h1 class="display-3">A Warm Welcome!</h1>
-      <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.</p>
-      <a href="#" class="btn btn-primary btn-lg">Call to action!</a>
-    </header>
-
-    <!-- Page Features -->
-    <div class="row text-center">
-
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-          <div class="card-body">
-            <h4 class="card-title">Card title</h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">Find Out More!</a>
-          </div>
-        </div>
+  <section class="jj-hero">
+    <div class="jj-hero-copy">
+      <div class="jj-eyebrow">
+        <span class="jj-dot"></span>
+        开发者技术博客 · 持续更新
       </div>
-
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-          <div class="card-body">
-            <h4 class="card-title">Card title</h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magni sapiente, tempore debitis beatae culpa natus architecto.</p>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">Find Out More!</a>
-          </div>
-        </div>
+      <h1>写技术，也写成长</h1>
+      <p class="jj-hero-subtitle">
+        用清晰的文章记录每一次思考与实践。这里分享 Django、前端、架构与开发日常，陪你把经验沉淀成能力。
+      </p>
+      <div class="jj-hero-actions">
+        <a href="/blog" class="jj-btn jj-btn-primary">开始阅读</a>
+        <a href="/admin/" class="jj-btn jj-btn-ghost">进入后台</a>
       </div>
-
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-          <div class="card-body">
-            <h4 class="card-title">Card title</h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">Find Out More!</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-          <div class="card-body">
-            <h4 class="card-title">Card title</h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magni sapiente, tempore debitis beatae culpa natus architecto.</p>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">Find Out More!</a>
-          </div>
-        </div>
-      </div>
-
+      <ul class="jj-tech-tags">
+        <li>Django</li>
+        <li>Python</li>
+        <li>Bootstrap</li>
+        <li>Web</li>
+      </ul>
     </div>
-    <!-- /.row -->
 
-  </div>
-  <!-- /.container -->
+    <div class="jj-code-window" aria-hidden="true">
+      <div class="jj-code-head">
+        <span class="jj-code-dots"><i></i><i></i><i></i></span>
+        <span class="jj-code-title">blog/hello.py</span>
+      </div>
+      <pre class="jj-code-body"><code><span class="jj-line">01</span> <span class="jj-kw">from</span> django.shortcuts <span class="jj-kw">import</span> render
+<span class="jj-line">02</span>
+<span class="jj-line">03</span> <span class="jj-kw">def</span> <span class="jj-fn">home</span>(request):
+<span class="jj-line">04</span>     <span class="jj-kw">return</span> render(
+<span class="jj-line">05</span>         request,
+<span class="jj-line">06</span>         <span class="jj-str">"home.html"</span>,
+<span class="jj-line">07</span>         {<span class="jj-str">"title"</span>: <span class="jj-str">"写技术，也写成长"</span>}
+<span class="jj-line">08</span>     )</code></pre>
+      <div class="jj-code-status">
+        <span><i class="jj-status-dot"></i> Django 2.2</span>
+        <span>ready in 12ms</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="jj-section-head">
+    <div>
+      <h2>快捷入口</h2>
+      <p>从分类到创作，快速抵达你想去的地方</p>
+    </div>
+    <span class="jj-section-count">4 个入口</span>
+  </section>
+
+  <section class="jj-feature-grid">
+    <a href="/blog" class="jj-feature-card">
+      <span class="jj-feature-icon">目</span>
+      <div class="jj-feature-body">
+        <h3>文章分类</h3>
+        <p>按主题浏览文章，快速定位感兴趣的内容。</p>
+        <span class="jj-feature-meta">分类浏览 · 结构化阅读</span>
+      </div>
+      <span class="jj-feature-arrow">→</span>
+    </a>
+
+    <a href="/blog" class="jj-feature-card">
+      <span class="jj-feature-icon">新</span>
+      <div class="jj-feature-body">
+        <h3>最新文章</h3>
+        <p>查看最近更新，跟上站点的内容节奏。</p>
+        <span class="jj-feature-meta">持续更新 · 技术记录</span>
+      </div>
+      <span class="jj-feature-arrow">→</span>
+    </a>
+
+    <a href="/blog" class="jj-feature-card">
+      <span class="jj-feature-icon">论</span>
+      <div class="jj-feature-body">
+        <h3>评论互动</h3>
+        <p>在文章下方交流想法，一起把问题聊透。</p>
+        <span class="jj-feature-meta">观点交流 · 共同成长</span>
+      </div>
+      <span class="jj-feature-arrow">→</span>
+    </a>
+
+    <a href="/admin/" class="jj-feature-card">
+      <span class="jj-feature-icon">写</span>
+      <div class="jj-feature-body">
+        <h3>后台管理</h3>
+        <p>维护分类、文章与评论，专注内容创作。</p>
+        <span class="jj-feature-meta">内容管理 · 创作中心</span>
+      </div>
+      <span class="jj-feature-arrow">→</span>
+    </a>
+  </section>
+
+  <section class="jj-info-bar">
+    <div class="jj-info-item">
+      <strong>分类浏览</strong>
+      <span>按主题高效查找</span>
+    </div>
+    <div class="jj-info-item">
+      <strong>技术记录</strong>
+      <span>沉淀实践经验</span>
+    </div>
+    <div class="jj-info-item">
+      <strong>评论交流</strong>
+      <span>分享你的观点</span>
+    </div>
+    <div class="jj-info-item">
+      <strong>Django 驱动</strong>
+      <span>简洁而可靠</span>
+    </div>
+  </section>
+
+</div>
 {% endblock %}

@@ -1,45 +1,29 @@
 {% extends "base.html" %}
-{% block title %}
-  {{title}}
-{% endblock %}
-{% block additionalCSS %}
-  {% load static %}
-  <link href="{% static 'css/heroic-features.css' %}" rel="stylesheet">
-{% endblock %}
-{% block navBlog %}
-    active
-{% endblock %}
+{% block title %}{{ title }}{% endblock %}
+{% block navBlog %}active{% endblock %}
+
 {% block content %}
-  <!-- Page Content -->
-  <div class="container">
+<div class="csdn-container">
+  <section class="jj-page-hero">
+    <h1>文章分类</h1>
+    <p>{{ name }}</p>
+  </section>
 
-    <!-- Jumbotron Header -->
-    <header class="jumbotron my-4">
-      <h1 class="display-3">{{name}}</h1>
-      <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.</p>
-      <a href="#" class="btn btn-primary btn-lg">Call to action!</a>
-    </header>
-
-    <!-- Page Features -->
-    <div class="row text-center">
-      {% for category in categories %}
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <!-- <img class="card-img-top" src="http://placehold.it/500x325" alt=""> -->
-          <img class="card-img-top" src="/media/{{category.thumbnail}}" alt="">
-          <div class="card-body">
-            <h4 class="card-title">{{category.title}}</h4>
-            <p class="card-text">{{category.shortDescription}}</p>
-          </div>
-          <div class="card-footer">
-            <a href="/blog/{{ category.slug }}" class="btn btn-primary">Find Out More!</a>
-          </div>
-        </div>
+  <div class="jj-category-grid">
+    {% for category in categories %}
+    <article class="jj-category-card">
+      <img class="jj-category-cover" src="/media/{{ category.thumbnail }}" alt="{{ category.title }}" onerror="this.style.display='none'">
+      <div class="jj-category-body">
+        <h2>{{ category.title }}</h2>
+        <p>{{ category.shortDescription }}</p>
+        <a href="/blog/{{ category.slug }}" class="jj-category-link">查看文章 →</a>
       </div>
-      {% endfor %}
+    </article>
+    {% empty %}
+    <div class="jj-empty" style="grid-column: 1 / -1;">
+      暂无分类，请先在后台管理中添加分类。
     </div>
-    <!-- /.row -->
-
+    {% endfor %}
   </div>
-  <!-- /.container -->
+</div>
 {% endblock %}

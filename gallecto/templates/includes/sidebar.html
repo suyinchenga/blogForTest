@@ -1,0 +1,31 @@
+<div class="jj-side-card">
+  <h5 class="jj-side-card-head">搜索文章</h5>
+  <div class="jj-side-card-body">
+    <form class="jj-search-form" action="/blog" method="get">
+      <input type="text" name="q" placeholder="输入关键词">
+      <button type="submit">搜索</button>
+    </form>
+  </div>
+</div>
+
+<div class="jj-side-card">
+  <h5 class="jj-side-card-head">文章分类</h5>
+  <div class="jj-side-card-body">
+    <ul class="jj-side-list">
+      {% for item in categories %}
+      <li><a href="/blog/{{ item.slug }}">{{ item.title }}</a></li>
+      {% empty %}
+      <li><a href="/blog">查看全部分类</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+<div class="jj-side-card">
+  <h5 class="jj-side-card-head">站点公告</h5>
+  <div class="jj-side-card-body">
+    <p class="jj-notice">
+      欢迎访问 Gallecto 技术博客。你可以在这里阅读文章、参与评论，也可以在后台管理内容。
+    </p>
+  </div>
+</div>

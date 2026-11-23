@@ -1,21 +1,19 @@
-<div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-                <span class="sr-only">Chiudi</span>
-            </button>
-            <h4 class="modal-title">Inserimento notizia</h4>
-        </div>
-        <div class="modal-body">
-            <p class="alert alert-info">Your comment has been posted, it will soon be visible if your email is verified!</p>
-            <p class="alert alert-info">(If your email is not verified, verify it !</p>
-        </div><!-- /.modal-body -->
-     </div><!-- /.modal-content -->
-</div><!-- /.modal-dialog -->
+<div class="modal-dialog modal-dialog-centered jj-modal" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title jj-modal-title">评论提交成功</h4>
+    </div>
+    <div class="modal-body">
+      <p class="jj-notice">你的评论已提交，审核通过后将会显示。</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="jj-modal-btn jj-modal-btn-primary" data-dismiss="modal">知道了</button>
+    </div>
+  </div>
+</div>
+
 <script>
-    // close the modal after 3 seconds
-    setTimeout(function() {
-        $('#comment_modal').modal('hide');
-    }, 3000);
+  setTimeout(function () {
+    $('#comment_modal').modal('hide');
+  }, 2000);
 </script>

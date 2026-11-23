@@ -1,36 +1,37 @@
-{% load i18n widget_tweaks %}
-<div class="modal-dialog modal-lg" role="modal">
-    <form action="/create-comment" method="post" id="create-comment" class="form">{% csrf_token %}
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Post your comment</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                    <span class="sr-only">Close</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                {% for field in form.visible_fields %}
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">
-                            {{ field.label_tag }}
-                        </label>
-                        {{ field|attr:"class:form-control" }}
+{% load widget_tweaks %}
+<div class="modal-dialog modal-lg modal-dialog-centered jj-modal" role="document">
+  <form action="/create-comment" method="post" id="create-comment">
+    {% csrf_token %}
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title jj-modal-title">发表评论</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="关闭">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {% for field in form.visible_fields %}
+          <div class="form-group">
+            <div class="jj-form-label">{{ field.label }}</div>
+            {{ field|attr:"class:form-control jj-form-control" }}
+            {% for error in field.errors %}
+              <p class="jj-error-text">{{ error }}</p>
+            {% endfor %}
+          </div>
+        {% endfor %}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="jj-modal-btn jj-modal-btn-ghost" data-dismiss="modal">取消</button>
+        <input type="submit" class="jj-modal-btn jj-modal-btn-primary" value="提交评论">
+      </div>
+    </div>
+  </form>
+</div>
 
-                        {% for error in field.errors %}
-                            <p class="help-block">{{ error }}</p>
-                        {% endfor %}
-                    </div>
-                {% endfor %}
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <input type="submit" class="btn btn-primary" value="Publish" />
-            </div>
-        </div><!-- /.modal-content -->
-    </form>
-</div><!-- /.modal-dialog -->
 <script>
-    var form_options = { target: '#comment_modal', success: function(response) {} };
-    $('#create-comment').ajaxForm(form_options);
+  var form_options = {
+    target: '#comment_modal',
+    success: function () {}
+  };
+  $('#create-comment').ajaxForm(form_options);
 </script>

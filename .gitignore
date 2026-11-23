@@ -4,4 +4,7 @@
 *migrations*
 media/
 db.sqlit3
+.venv/
+.logs/
+*.bak
 

@@ -1,132 +1,75 @@
 {% extends "base.html" %}
-{% block title %}
-  {{post.title}}
-{% endblock %}
-{% block additionalCSS %}
-  {% load static %}
-  <link href="{% static 'css/blog-post.css' %}" rel="stylesheet">
-{% endblock %}
-{% block navBlog %}
-    active
-{% endblock %}
+{% block title %}{{ post.title }}{% endblock %}
+{% block navBlogPost %}active{% endblock %}
+
 {% block content %}
-  <!-- Page Content -->
-  <div class="container">
-    <div class="row">
-      <!-- Post Content Column -->
-      <div class="col-lg-8">
-        <!-- Title -->
-        <h1 class="mt-4">{{post.title}}</h1>
-        <hr>
-        <!-- Date/Time -->
-        <p>Posted on January 1, 2019 at 12:00 PM</p>
-        <hr>
-        <!-- Preview Image -->
-        <img class="img-fluid rounded" src="/media/{{post.banner}}" alt="">
-        <hr>
-        <!-- Post Content -->
-        <p class="lead">{{ post.description }}</p>
-        <div id="post_content">
-          {{ post.content | safe}}
-        </div>
-        <hr>
-        <!-- Comments Form -->
-        <!-- <div class="card my-4">
-          <h5 class="card-header">Leave a Comment:</h5>
-          <div class="card-body">
-            <form>
-              <div class="form-group">
-                <textarea class="form-control" rows="3"></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-          </div>
-        </div> -->
-        <p>Click <a data-toggle="modal" data-target="#comment_modal" href="/create-comment">here</a> to show the modal</p>
-        <div class="modal fade" id="comment_modal"></div>
-        <div id="Comments">
-          <ul class="list-group">
-          {% if comments %}
-            {% for comment in comments %}
-              <li class="list-group-item list-group-item-primary text-dark" data-comment_id= "{{comment.id}}">
-                <h5 class="list-group-item-heading"> {{comment.name}} </h5>
-                <p class="list-group-item-text"> {{comment.text}} </p>
-                {% if comment.replies %}
-                  <ul class="list-group">
-                  <!-- Comment with nested comments -->
-                  {% for reply in comment.replies %}
-                    <li class="list-group-item list-group-item-warning" data-comment_id= "{{reply.id}}">
-                      <h5 class="list-group-item-heading"> {{reply.name}} </h5>
-                      <p class="list-group-item-text"> {{reply.text}} </p>
-                    </li>
-                  {% endfor %}
-                  </ul>
-                {% endif %}
-              </li>
-            {% endfor %}
-          {% else %}
-            <li class="list-group-item list-group-item-primary text-dark">
-                <h5 class="list-group-item-heading"> Be the first one to comment on this post </h5>
-            </li>
-          {% endif %}
-          </ul>
-        </div>
-      </div>
-
-      <!-- Sidebar Widgets Column -->
-      <div class="col-md-4">
-
-        <!-- Search Widget -->
-        <div class="card my-4">
-          <h5 class="card-header">Search</h5>
-          <div class="card-body">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search for...">
-              <span class="input-group-btn">
-                <button class="btn btn-secondary" type="button">Go!</button>
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Categories Widget -->
-        <div class="card my-4">
-          <h5 class="card-header">Categories</h5>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-lg-12">
-                <ul class="list-unstyled mb-0">
-                  <li>
-                    <a href="#">Web Design</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Side Widget -->
-        <div class="card my-4">
-          <h5 class="card-header">Side Widget</h5>
-          <div class="card-body">
-            You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
-          </div>
-        </div>
-
-      </div>
-    </div>
-    <!-- /.row -->
+<div class="csdn-container">
+  <div class="jj-breadcrumb">
+    <a href="/">首页</a> / <a href="/blog">分类</a> / <a href="/blog/{{ post.category.slug }}">{{ post.category.title }}</a> / {{ post.title }}
   </div>
-  <!-- /.container -->
-  <script>
-    $('#comment_modal').on('show.bs.modal', function (event) {
-        var modal = $(this)
-        $.ajax({
-            url: "/create-comment",
-            context: document.body
-        }).done(function(response) {
-            modal.html(response);
-        });
-    })
-    </script>
+
+  <div class="jj-content-layout">
+    <article class="jj-detail-card">
+      <h1 class="jj-detail-title">{{ post.title }}</h1>
+      <div class="jj-detail-meta">
+        <span class="jj-article-tag">{{ post.category.title }}</span>
+        发布于 {{ post.published_on|date:"Y年m月d日 H:i" }}
+      </div>
+
+      <img class="jj-detail-cover" src="/media/{{ post.banner }}" alt="{{ post.title }}" onerror="this.style.display='none'">
+
+      <p class="jj-detail-summary">{{ post.description }}</p>
+
+      <div class="jj-detail-content">
+        {{ post.content|safe }}
+      </div>
+
+      <section class="jj-comments" id="comments">
+        <div class="jj-comments-head">
+          <h3>评论</h3>
+          <a data-toggle="modal" data-target="#comment_modal" href="/create-comment" class="jj-comment-trigger">发表评论</a>
+        </div>
+
+        <div class="modal fade" id="comment_modal"></div>
+
+        {% if comments %}
+          {% for comment in comments %}
+            <div class="jj-comment">
+              <h5 class="jj-comment-name">{{ comment.name }}</h5>
+              <p class="jj-comment-text">{{ comment.text }}</p>
+              <div class="jj-comment-time">{{ comment.created_on|date:"Y-m-d H:i" }}</div>
+
+              {% if comment.replies %}
+                {% for reply in comment.replies %}
+                  <div class="jj-comment jj-comment-reply">
+                    <h5 class="jj-comment-name">{{ reply.name }} 回复</h5>
+                    <p class="jj-comment-text">{{ reply.text }}</p>
+                    <div class="jj-comment-time">{{ reply.created_on|date:"Y-m-d H:i" }}</div>
+                  </div>
+                {% endfor %}
+              {% endif %}
+            </div>
+          {% endfor %}
+        {% else %}
+          <div class="jj-empty">暂无评论，快来发表第一条评论吧。</div>
+        {% endif %}
+      </section>
+    </article>
+
+    <aside class="jj-side-column">
+      {% include "includes/sidebar.html" %}
+    </aside>
+  </div>
+</div>
+
+<script>
+  $('#comment_modal').on('show.bs.modal', function () {
+    $.ajax({
+      url: "/create-comment",
+      context: document.body
+    }).done(function (response) {
+      $('#comment_modal').html(response);
+    });
+  });
+</script>
 {% endblock %}

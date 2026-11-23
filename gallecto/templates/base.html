@@ -1,74 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="zh-CN">
 <head>
-
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+  <meta name="description" content="Gallecto 博客，记录技术、分享经验、沉淀思考。">
+  <title>{% block title %}Gallecto 博客{% endblock %}</title>
 
-  <title>{% block title %} Heroic Features - Start Bootstrap Template {% endblock %}</title>
-
-  <!-- Bootstrap core CSS -->
   {% load static %}
-  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/csdn-style.css' %}" rel="stylesheet">
+  <link href="{% static 'css/inner-juejin.css' %}" rel="stylesheet">
+  {% block additionalCSS %}{% endblock %}
 
-  {% block additionalCSS %}
-  {% endblock %}
   <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-  <script src="http://malsup.github.com/jquery.form.js"></script>
+  <script src="https://malsup.github.com/jquery.form.js"></script>
 </head>
-
 <body>
 
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">Start Bootstrap</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item {% block navHome %} {% endblock %}" >
-            <a class="nav-link" href="/">Home
-            </a>
-          </li>
-          <li class="nav-item {% block navAbout %} {% endblock %}">
-            <a class="nav-link" href="#">About</a>
-          </li>
-          <li class="nav-item {% block navBlog %} {% endblock %}">
-            <a class="nav-link" href="/blog">Blog</a>
-          </li>
-          <li class="nav-item {% block navContact %} {% endblock %}">
-            <a class="nav-link" href="#">Contact</a>
-          </li>
-        </ul>
+  <!-- 顶部导航 -->
+  <nav class="csdn-nav">
+    <div class="nav-inner">
+      <a class="csdn-brand" href="/">
+        <span class="brand-logo">码</span>
+        <span>Gallecto 技术博客</span>
+      </a>
+
+      <div class="csdn-nav-links">
+        <a href="/" class="{% block navHome %}{% endblock %}">首页</a>
+        <a href="/blog" class="{% block navBlog %}{% endblock %}">分类</a>
+        <a href="/blog" class="{% block navBlogPost %}{% endblock %}">文章</a>
+        <a href="/admin/">后台管理</a>
       </div>
+
+      <form class="csdn-search" action="/blog" method="get">
+        <input type="text" name="q" placeholder="搜索文章或标签">
+        <button type="submit">搜索</button>
+      </form>
     </div>
   </nav>
 
-  <!-- Page Content -->
-  <div id="content">
-      {% block content %}
-      <p>Content block</p>
-      {% endblock %}
-  </div>
+  <main class="csdn-main">
+    {% block content %}{% endblock %}
+  </main>
 
-  <!-- Footer -->
-  <footer class="py-3 bg-primary">
-    <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; GALLECTO 2019</p>
+  <footer class="csdn-footer">
+    <div class="csdn-container">
+      <p class="mb-0">© 2019-2026 Gallecto 博客 · 使用 Django 构建</p>
     </div>
   </footer>
 
-  <!-- Bootstrap core JavaScript -->
-  <!-- <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script> -->
   <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-  {% block additionalJS %}
-  {% endblock %}
+  {% block additionalJS %}{% endblock %}
 </body>
-
 </html>

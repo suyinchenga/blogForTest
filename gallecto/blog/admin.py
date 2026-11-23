@@ -1,29 +1,40 @@
 from django.contrib import admin
-from .models import *
+from .models import Category, Post, Comment
 
-# Register your models here.
+admin.site.site_header = "Gallecto 技术博客管理后台"
+admin.site.site_title = "Gallecto 技术博客管理"
+admin.site.index_title = "博客管理"
 
-class CategoryAdmin(admin.ModelAdmin):
-    # explicitly reference fields to be shown, note image_tag is read-only'
-    list_display = ['id', 'title', 'slug', 'status', 'created_on',]
-    list_filter = ['status', 'created_on']
-    search_fields = ('id', 'title', 'slug')
-    list_editable = ['status']
-    readonly_fields = ['thumbnail_tag']
 
-class PostAdmin(admin.ModelAdmin):
-    # explicitly reference fields to be shown, note image_tag is read-only'
-    list_display = ['id', 'title', 'slug', 'status', 'created_on',]
-    list_filter = ['status', 'created_on', 'published_on']
-    search_fields = ('id', 'title', 'slug')
-    list_editable = ['status']
-    readonly_fields = ['banner_tag']
+class BaseBlogAdmin(admin.ModelAdmin):
+    def id_display(self, obj):
+        return obj.id
 
-class CommentAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'email','approved', 'created_on']
-    list_filter = ['approved', 'created_on']
-    search_fields = ['id', 'name', 'email']
-    list_editable = ['approved']
+    id_display.short_description = "编号"
+
+
+class CategoryAdmin(BaseBlogAdmin):
+    list_display = ["id_display", "title", "slug", "status", "created_on"]
+    list_filter = ["status", "created_on"]
+    search_fields = ["id", "title", "slug"]
+    list_editable = ["status"]
+    readonly_fields = ["thumbnail_tag", "created_on", "updated_on"]
+
+
+class PostAdmin(BaseBlogAdmin):
+    list_display = ["id_display", "title", "category", "status", "published_on"]
+    list_filter = ["status", "created_on", "published_on"]
+    search_fields = ["id", "title", "slug"]
+    list_editable = ["status"]
+    readonly_fields = ["banner_tag", "created_on", "updated_on"]
+
+
+class CommentAdmin(BaseBlogAdmin):
+    list_display = ["id_display", "name", "email", "approved", "created_on"]
+    list_filter = ["approved", "created_on"]
+    search_fields = ["id", "name", "email"]
+    list_editable = ["approved"]
+    readonly_fields = ["created_on"]
 
 
 admin.site.register(Category, CategoryAdmin)
